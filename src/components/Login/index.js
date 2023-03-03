@@ -4,6 +4,18 @@ import {Redirect} from 'react-router-dom'
 
 import Cookies from 'js-cookie'
 
+import {
+  LoginPage,
+  LoginContainer,
+  LoginImg,
+  LoginForm,
+  LoginHeading,
+  LoginLabel,
+  LoginInput,
+  LoginButton,
+  LoginError,
+} from './styledComponents'
+
 class Login extends Component {
   state = {userId: '', pin: '', error: ''}
 
@@ -14,7 +26,7 @@ class Login extends Component {
   onSubmit = async event => {
     event.preventDefault()
 
-    const {userId, pin, error} = this.state
+    const {userId, pin} = this.state
 
     const userDetails = {user_id: userId, pin}
 
@@ -28,13 +40,13 @@ class Login extends Component {
     const data = await response.json()
 
     if (response.ok) {
-      Cookies.set('jwt_token', data.jwtToken, {expires: 2})
+      Cookies.set('jwt_token', data.jwt_token, {expires: 2})
 
-      const {history} = props
+      const {history} = this.props
 
       history.replace('/')
     } else {
-      this.setState({error: response.error_msg})
+      this.setState({error: data.error_msg})
     }
   }
 
@@ -58,6 +70,7 @@ class Login extends Component {
             <LoginHeading>Welcome Back!</LoginHeading>
             <LoginLabel htmlFor="userId">User ID</LoginLabel>
             <LoginInput
+              type="input"
               id="userId"
               placeholder="Enter User ID"
               onChange={this.changeUserId}
@@ -65,6 +78,7 @@ class Login extends Component {
             />
             <LoginLabel htmlFor="pin">PIN</LoginLabel>
             <LoginInput
+              type="password"
               id="pin"
               placeholder="Enter PIN"
               onChange={this.changePin}

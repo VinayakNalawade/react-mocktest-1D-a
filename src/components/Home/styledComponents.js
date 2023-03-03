@@ -12,17 +12,23 @@ export const Navbar = styled.nav`
   padding: 2%;
   padding-right: 4%;
   padding-left: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const NavLogo = styled.img`
-  width: 180px;
+  width: 120px;
 `
 export const LogoutButton = styled.button`
   outline: none;
   border: 1px solid #ffffff;
-  padding: 7px;
+  padding: 9px;
+  color: #ffffff;
+  font-size: 16px;
   padding-left: 12px;
   padding-right: 12px;
+  background-color: transparent;
 `
 export const HomeContainer = styled.div`
   flex-grow: 1;
